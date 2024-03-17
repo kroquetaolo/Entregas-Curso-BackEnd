@@ -15,12 +15,12 @@ class ProductManager {
      */
     
     addProduct(title, description, price, thumbnail, code, stock) {
-        const newProduct = {title, description, price, thumbnail, code, stock, id: this.#getNextId()}
         if (!title || !description || !price || !thumbnail || !code || !stock) {
             console.error("All parameters are required")
         } else if (this.#products.find(product => product.code === code)){
             console.log(`The product code for ${title} already exists`);
         } else {
+            const newProduct = {title, description, price, thumbnail, code, stock, id: this.#getNextId()}
             this.#products.push(newProduct)
 
         }
