@@ -1,0 +1,11 @@
+[
+	{
+		"title": "Papa",
+		"description": "una papa divino",
+		"price": 12,
+		"thumbnail": "papa.jpg",
+		"code": "V001",
+		"stock": 200,
+		"id": 1
+	}
+]
