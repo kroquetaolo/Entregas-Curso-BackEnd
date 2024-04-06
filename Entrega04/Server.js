@@ -1,26 +1,20 @@
 import express from 'express';
-import ProductManager from './ProductManager.js';
+import productsRouter from './src/routes/products.route.js'
+import { __dirname } from './src/Utils/Statics.js';
 
 const app = express()
-const productManager = new ProductManager('./products.json')
+
+app.use(express.json())
+app.use(express.urlencoded({extended: true}))
+app.use(express.static(__dirname+'/public'))
+
+app.use('/api/products', productsRouter)
 
 app.get('/', (req, res) => {
     res.send(`Intenta con esta ruta "/products" ;D`)
 })
 
-app.get('/products', (req, res) => {
-    const { limit } = req.query
-    if(!limit) return res.send(productManager.getProducts())
-    const numberLimit = Number.parseInt(limit)
-    res.json(productManager.getProducts().slice(0, numberLimit))
-})
-
-app.get('/products/:pid', (req, res) => {
-    const { pid } = req.params
-    const numberID = Number.parseInt(pid)
-    res.json(productManager.getProductById(numberID))
-})
-
 app.listen(8080, error => {
+    if(error) console.log(error.message);
     console.log('Escuchando el puerto 8080')
 })

@@ -3,135 +3,193 @@
 		"title": "Papa",
 		"description": "una papa divino",
 		"price": 15,
-		"thumbnail": "papa.jpg",
+		"thumbnail": [
+			"papa-Primary.jpg",
+			"papa-Secundary.jpg"
+		],
 		"code": "V001",
 		"stock": 200,
+		"status": true,
 		"id": 1
 	},
 	{
 		"title": "Tomate",
 		"description": "un tomate divino",
 		"price": 15,
-		"thumbnail": "tomate.jpg",
+		"thumbnail": [
+			"tomate-Primary.jpg",
+			"tomate-Secundary.jpg"
+		],
 		"code": "V002",
 		"stock": 200,
+		"status": true,
 		"id": 2
 	},
 	{
 		"title": "Manzana",
 		"description": "una manzana deliciosa",
 		"price": 10,
-		"thumbnail": "manzana.jpg",
+		"thumbnail": [
+			"manzana-Primary.jpg",
+			"manzana-Secundary.jpg"
+		],
 		"code": "V003",
 		"stock": 150,
+		"status": true,
 		"id": 3
 	},
 	{
 		"title": "Plátano",
 		"description": "un plátano maduro",
 		"price": 10,
-		"thumbnail": "platano.jpg",
+		"thumbnail": [
+			"platano-Primary.jpg",
+			"platano-Secundary.jpg"
+		],
 		"code": "V004",
 		"stock": 100,
+		"status": true,
 		"id": 4
 	},
 	{
 		"title": "Naranja",
 		"description": "una naranja fresca",
 		"price": 10,
-		"thumbnail": "naranja.jpg",
+		"thumbnail": [
+			"naranja-Primary.jpg",
+			"naranja-Secundary.jpg"
+		],
 		"code": "V005",
 		"stock": 120,
+		"status": true,
 		"id": 5
 	},
 	{
 		"title": "Fresa",
 		"description": "una fresa jugosa",
 		"price": 10,
-		"thumbnail": "fresa.jpg",
+		"thumbnail": [
+			"fresa-Primary.jpg",
+			"fresa-Secundary.jpg"
+		],
 		"code": "V006",
 		"stock": 180,
+		"status": true,
 		"id": 6
 	},
 	{
 		"title": "Sandía",
 		"description": "una sandía refrescante",
 		"price": 5,
-		"thumbnail": "sandia.jpg",
+		"thumbnail": [
+			"sandia-Primary.jpg",
+			"sandia-Secundary.jpg"
+		],
 		"code": "V007",
 		"stock": 300,
+		"status": true,
 		"id": 7
 	},
 	{
 		"title": "Piña",
 		"description": "una piña tropical",
 		"price": 5,
-		"thumbnail": "pina.jpg",
+		"thumbnail": [
+			"pina-Primary.jpg",
+			"pina-Secundary.jpg"
+		],
 		"code": "V008",
 		"stock": 250,
+		"status": true,
 		"id": 8
 	},
 	{
 		"title": "Melón",
 		"description": "un melón dulce",
 		"price": 5,
-		"thumbnail": "melon.jpg",
+		"thumbnail": [
+			"melon-Primary.jpg",
+			"melon-Secundary.jpg"
+		],
 		"code": "V009",
 		"stock": 200,
+		"status": true,
 		"id": 9
 	},
 	{
 		"title": "Uva",
 		"description": "unas uvas frescas",
 		"price": 10,
-		"thumbnail": "uva.jpg",
+		"thumbnail": [
+			"uva-Primary.jpg",
+			"uva-Secundary.jpg"
+		],
 		"code": "V010",
 		"stock": 300,
+		"status": true,
 		"id": 10
 	},
 	{
 		"title": "Kiwi",
 		"description": "un kiwi exótico",
 		"price": 10,
-		"thumbnail": "kiwi.jpg",
+		"thumbnail": [
+			"default_thumbnail.jpg"
+		],
 		"code": "V011",
 		"stock": 200,
+		"status": true,
 		"id": 11
 	},
 	{
 		"title": "Mango",
 		"description": "un mango maduro",
 		"price": 5,
-		"thumbnail": "mango.jpg",
+		"thumbnail": [
+			"mango-Primary.jpg",
+			"mango-Secundary.jpg"
+		],
 		"code": "V012",
 		"stock": 180,
+		"status": true,
 		"id": 12
 	},
 	{
 		"title": "Pera",
 		"description": "una pera jugosa",
 		"price": 10,
-		"thumbnail": "pera.jpg",
+		"thumbnail": [
+			"pera-Primary.jpg",
+			"pera-Secundary.jpg"
+		],
 		"code": "V013",
 		"stock": 150,
+		"status": true,
 		"id": 13
 	},
 	{
 		"title": "Cereza",
 		"description": "unas cerezas frescas",
 		"price": 10,
-		"thumbnail": "cereza.jpg",
+		"thumbnail": [
+			"cereza-Primary.jpg",
+			"cereza-Secundary.jpg"
+		],
 		"code": "V014",
 		"stock": 250,
+		"status": true,
 		"id": 14
 	},
 	{
 		"title": "Limón",
 		"description": "un limón ácido",
 		"price": 15,
-		"thumbnail": "limon.jpg",
+		"thumbnail": [
+			"default_thumbnail.jpg"
+		],
 		"code": "V015",
 		"stock": 100,
+		"status": true,
 		"id": 15
 	}
 ]
