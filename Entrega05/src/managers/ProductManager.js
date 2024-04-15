@@ -79,6 +79,7 @@ export default class ProductManager {
 
     socketDataLoad() {
         socketServer.on('connection', socket => {
+            console.log("cliente conectado")
             socket.emit('dataLoad', this.#products)
         })
     }
