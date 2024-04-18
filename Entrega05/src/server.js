@@ -2,7 +2,7 @@ import express from 'express';
 import productsRouter from './routes/products.route.js'
 import cartsRouter from './routes/carts.route.js'
 import viewsRouter from './routes/views.route.js'
-import { __dirname } from './Utils.js';
+import { __dirname } from './utils.js';
 
 import handlebars from 'express-handlebars';
 import { Server } from 'socket.io'
