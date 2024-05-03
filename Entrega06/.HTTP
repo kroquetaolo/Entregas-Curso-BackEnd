@@ -1,0 +1,71 @@
+###
+GET http://localhost:8080/api/products
+
+###
+http://localhost:8080/api/products?limit=1
+
+###
+GET http://localhost:8080/api/products/6633cf7a3df0039f0d639e1f
+
+###
+POST http://localhost:8080/api/products
+Content-Type: application/json
+
+{
+    "title": "Aguacate",
+    "description": "un aguacate maduro",
+    "stock": 10,
+    "code": "V016",
+    "price": 150,
+    "thumbnail": ["aguacate-Primary.jpg", "aguacate-Secundary.jpg"]
+}
+
+###
+POST http://localhost:8080/api/products
+Content-Type: application/json
+
+	{
+		"title": "Pera",
+		"description": "una pera jugosa",
+		"price": 10,
+		"thumbnail": [
+			"pera-Primary.jpg",
+			"pera-Secundary.jpg"
+		],
+		"code": "V013",
+		"stock": 150,
+		"status": true
+	}
+
+###
+POST http://localhost:8080/api/products
+Content-Type: application/json
+
+{   
+    "title": "Papaya",
+    "description": "una papaya dulce",
+    "stock": 8,
+    "code": "V017",
+    "price": 120
+}
+
+###
+PUT http://localhost:8080/api/products/6633cf7a3df0039f0d639e1f
+Content-Type: application/json
+
+{   
+    "newValue": "Palta",
+    "key": "title"
+}
+
+###
+DELETE http://localhost:8080/api/products/6633cf7a3df0039f0d639e1f
+
+###
+GET http://localhost:8080/api/carts/
+
+###
+POST http://localhost:8080/api/carts/
+
+###
+POST http://localhost:8080/api/carts/1/product/4
