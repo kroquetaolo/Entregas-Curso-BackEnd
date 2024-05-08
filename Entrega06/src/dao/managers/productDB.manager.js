@@ -31,24 +31,12 @@ export default class ProductDBManager {
      * @param {number} stock
      */
 
-    async addProduct(title, description, price, code, stock, thumbnail) {
-        if (!title || !description || !price || !code || !stock) {
-            return "All parameters are required"
-        }
-        const product = await productsModel.findOne({code: code})
-        if(product) {
-            return `The product code for ${title} already exists`
+    async addProduct(product) {
+        const exist = await productsModel.findOne({code: product.code})
+        if(exist) {
+            return `The product code for ${product.title} already exists`
         } else {
-            const newProduct = await productsModel.create({
-                title,
-                description,
-                price,
-                code,
-                stock,
-                thumbnail: thumbnail ?? ['default_thumbnail.jpg'],
-                status: true
-            })
-
+            const newProduct = await productsModel.create(product)
             this.socketDataChanged()
             return newProduct;
 

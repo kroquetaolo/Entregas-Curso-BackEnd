@@ -24,8 +24,22 @@ router.get('/:pid', async (req, res) => {
 
 router.post('/', async (req, res) => {
     const {title, description, price, code, stock, thumbnail} = req.body
-    const newProduct = await productManager.addProduct(title, description, price, code, stock, thumbnail)
-    res.status(200).send(newProduct)
+
+    if (!title || !description || !price || !code || !stock) {
+        res.status(200).send("All parameters are required")
+    } else {
+        const product = {
+            title,
+            description,
+            price,
+            code,
+            stock,
+            thumbnail: thumbnail ?? ['default_thumbnail.jpg'],
+            status: true
+        }
+        const newProduct = await productManager.addProduct(product)
+        res.status(200).send(newProduct)
+    }
 
 })
 
