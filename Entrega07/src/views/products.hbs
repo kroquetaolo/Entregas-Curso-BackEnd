@@ -1,0 +1,32 @@
+<h1> Fancy title </h1>
+<main>
+    <div class="products-container">
+        {{#each products}}
+            <div class="products">
+                <h2>{{title}}</h2>
+                {{!-- <p>{{description}}</p> --}}
+                <img class="products-img" src="/assets/default-image.jpg" alt="">
+                {{!-- {{#each thumbnail}}
+                    <img src="{{this}}" alt="">
+                {{/each}} --}}
+                <p>{{category}}</p>
+                <p>${{price}}</p>
+                <button>agregar al carrito</button>
+            </div>
+        {{/each}}
+    </div>
+
+    <div class="pagination">
+        <div class="{{#unless hasPrevPage}} pagination-unactive {{/unless}}pagination-prev">
+            <a href={{prevLink}}>❰</a>
+        </div>
+
+        <p class="pagination-numbers">{{page}} / {{totalPages}}</p>
+
+        <div class="{{#unless hasNextPage}} pagination-unactive {{/unless}}pagination-next">
+            <a href={{nextLink}}>❱</a>
+        </div>
+    </div>
+
+</main>
+<script src="/js/index.js"></script>

@@ -1,6 +1,6 @@
 import { messagesModel } from './models/messages.model.js';
 
-export default class MessagesDBManager {
+export default class MessagesManager {
 
     constructor() {
         this.model = messagesModel;

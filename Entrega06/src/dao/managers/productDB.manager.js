@@ -2,20 +2,23 @@ import { socketServer } from '../../server.js';
 import { productsModel } from './models/products.model.js';
 
 export default class ProductDBManager {
+    constructor() {
+        this.model = productsModel;
+    }
 
     async getProducts(){
-        const result  = await productsModel.find({})
+        const result  = await this.model.find({})
         return result
     }
 
     async limited(limit){
-        const result  = await productsModel.find({}).limit(Number.parseInt(limit))
+        const result  = await this.model.find({}).limit(Number.parseInt(limit))
         return result
     }
 
     async getProductById(pid) {
         try {
-            const result = await productsModel.findOne({ _id: pid })
+            const result = await this.model.findOne({ _id: pid })
             return result
         } catch (error) {
             return "not found"
@@ -32,11 +35,11 @@ export default class ProductDBManager {
      */
 
     async addProduct(product) {
-        const exist = await productsModel.findOne({code: product.code})
+        const exist = await this.model.findOne({code: product.code})
         if(exist) {
             return `The product code for ${product.title} already exists`
         } else {
-            const newProduct = await productsModel.create(product)
+            const newProduct = await this.model.create(product)
             this.socketDataChanged()
             return newProduct;
 
@@ -50,7 +53,7 @@ export default class ProductDBManager {
         }
 
         try {
-            const result = await productsModel.updateOne({_id: pid}, {[key]: newValue})
+            const result = await this.model.updateOne({_id: pid}, {[key]: newValue})
             this.socketDataChanged()
             return result
         } catch (error) {
@@ -60,7 +63,7 @@ export default class ProductDBManager {
 
     async deleteProduct(pid) {
         try {
-            const result = await productsModel.deleteOne({_id: pid})
+            const result = await this.model.deleteOne({_id: pid})
             this.socketDataChanged()
             return result
         } catch (error) {
