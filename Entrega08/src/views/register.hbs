@@ -1,0 +1,10 @@
+<form class="profile-form" action="api/sessions/register" method="post">
+    <input class="profile-input" type="email" id="email" name="email" placeholder="Email"><br><br>
+    <input class="profile-input" type="text" id="first_name" name="first_name" placeholder="First name"><br><br>
+    <input class="profile-input" type="text" id="last_name" name="last_name" placeholder="Last name"><br><br>
+    <input class="profile-input" type="date" id="age" name="age"><br><br>
+    <input class="profile-input" type="password" id="password" name="password" placeholder="Password"><br><br>
+
+    <input class="profile-submit{{#if session.user}} disabled{{/if}}" {{#if session.user}}disabled{{/if}} type="submit"  value="Regist">
+    <p> Already have an account? <a  class="orange" href="/login">Login</a> here</p>
+</form>

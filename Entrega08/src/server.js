@@ -1,15 +1,23 @@
 import express from 'express';
 import productsRouter from './routes/api/products.route.js'
 import cartsRouter from './routes/api/carts.route.js'
+import sessionsRouter from './routes/api/sessions.route.js'
 import viewsRouter from './routes/views.route.js'
+
 import { __dirname } from './utils.js';
+import MessagesManager from './dao/managers/messages.manager.js';
 
 import handlebars from 'express-handlebars';
 import { Server } from 'socket.io'
 
 import {connectDB} from './config/index.js'
 
-import MessagesManager from './dao/managers/messages.manager.js';
+import cookieParser from 'cookie-parser';
+import session from 'express-session';
+
+import MongoStore from 'connect-mongo';
+
+
 
 const app = express()
 const httpServer = app.listen(8080, error => {
@@ -20,6 +28,17 @@ const httpServer = app.listen(8080, error => {
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(express.static(__dirname+'/public'))
+
+app.use(cookieParser('p4ssw0rd'))
+app.use(session({
+    store: MongoStore.create({
+        mongoUrl: 'mongodb+srv://user:iFNVqxDMwG9Gs4Si@ecommerce.lrmmnhj.mongodb.net/ecommerce?retryWrites=true&w=majority&appName=ecommerce',
+        ttl: 60*5
+    }),
+    secret: 'p4ssw0rd',
+    resave: true,
+    saveUninitialized: true
+}))
 
 app.engine('hbs', handlebars.engine({
     extname: '.hbs',
@@ -35,11 +54,16 @@ app.set('view engine', 'hbs')
 
 connectDB()
 
+app.use((req, res, next) => {
+    res.locals.session = req.session;
+    next();
+});
+
 app.use('/', viewsRouter)
 
 app.use('/api/products', productsRouter)
 app.use('/api/carts', cartsRouter)
-
+app.use('/api/sessions', sessionsRouter)
 
 export const socketServer = new Server(httpServer);
 
