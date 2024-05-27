@@ -45,6 +45,16 @@ app.engine('hbs', handlebars.engine({
     helpers: {
         equals: function(first, second) {
             return first === second;
+        },
+        getAge: function(birthdate) {
+            const birthDate = new Date(birthdate);
+            const today = new Date();
+            let age = today.getFullYear() - birthDate.getFullYear();
+            const monthDiff = today.getMonth() - birthDate.getMonth();
+            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
+            return age;
         }
     }
 }))
@@ -55,7 +65,7 @@ app.set('view engine', 'hbs')
 connectDB()
 
 app.use((req, res, next) => {
-    res.locals.session = req.session;
+    if(req.session) res.locals.session = req.session;
     next();
 });
 
