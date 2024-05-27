@@ -5,6 +5,10 @@ export default class UserManager {
         this.model = usersModel;
     }
 
+    async getUsers() {
+        return await this.model.find().lean()
+    }
+
     async createUser(user) {
         let result
         try {

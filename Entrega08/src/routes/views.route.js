@@ -1,11 +1,14 @@
 import { Router } from 'express';
 import ProductManager from '../dao/managers/product.manager.js';
 import CartsManager from '../dao/managers/carts.manager.js';
+import UsersManager from '../dao/managers/users.manager.js';
 import { pagination } from '../pagination.js';
+import { auth } from '../middlewares/auth.middleware.js';
 
 const router = Router();
 const productManager = new ProductManager()
 const cartsManager = new CartsManager()
+const usersManager = new UsersManager()
 
 
 router.get('/', async (req, res) => {
@@ -76,6 +79,13 @@ router.get('/login', (req, res) => {
     } else {
         res.render('login')
     }
+})
+
+router.get('/users', auth, async (req, res) => {
+    const users = await usersManager.getUsers()
+    res.render('users', {
+        users
+    })
 })
 
 export default router

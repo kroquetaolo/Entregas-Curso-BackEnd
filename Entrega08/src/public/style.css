@@ -10,9 +10,10 @@
     --main-light: #fff;
     --main-dark: #000;
     --header-bg-color: #1a1a1a;
-    --main-orange: #ff9900;
     --secundary-light: #c6c6c6;
+    --main-orange: #ff9900;
     --disabled: #bd2626cc;
+    --important: #288fd4;
     --secundary-dark: #292929;
     --secundary-dark2: #232323;
     --unactive-dark: #0e0e0e;
@@ -26,8 +27,13 @@ body {
 }
 
 .orange {
-    color: var(--main-orange);
+    color: var(--main-orange) !important;
 }
+
+.important {
+    color: var(--important) !important;
+}
+
 .disabled {
     cursor: not-allowed;
     background-color: var(--disabled) !important;

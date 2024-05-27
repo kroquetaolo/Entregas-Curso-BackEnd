@@ -1,0 +1,15 @@
+<main>
+    <h1>USUARIOS!</h1>
+    <hr>
+    <div>
+        {{#each users}}
+        <div>
+            <h2>{{first_name}} {{last_name}}</h2>
+            <p>{{email}}</p>
+            <p>{{rol}}</p>
+        </div>
+        <hr>
+
+        {{/each}}
+    </div>
+</main>
