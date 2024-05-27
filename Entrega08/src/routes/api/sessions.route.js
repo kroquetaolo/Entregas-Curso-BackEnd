@@ -42,12 +42,13 @@ router.post('/login', async (req, res) => {
     res.redirect('/')
 })
 
-router.get('/logout', (req, res) => {
-    req.session.destroy( err => {
+router.get('/logout', async (req, res) => {
+    await req.session.destroy( err => {
         if(err) {
             return res.send({status: 'error', error: err})
         }
         return res.redirect('/')
     }) 
-}) 
+})
+
 export default router
