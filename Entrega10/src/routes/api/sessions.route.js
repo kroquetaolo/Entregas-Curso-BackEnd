@@ -53,11 +53,11 @@ export default class ProductsRouter extends CustomRouter {
         
         this.post('/login', ['PUBLIC'], async (req, res) => {
             const { email, password } = req.body
-            if(!email || !password) return res.sendUserError('All parameters required')
+            if(!email || !password) return res.render('error', {error: 'All parameters required', type: 'Login'})
             const validUser = await userService.getUserBy({email})
         
-            if(!validUser) return res.sendUserError('User not found')
-            if(!isValidPassword(password, validUser)) res.sendUserError('invalid password')
+            if(!validUser) return res.render('error', {error: 'User not found', type: 'Login'})
+            if(!isValidPassword(password, validUser)) res.render('error', {error: 'Invalid password', type: 'Login'})
         
             const { _id, first_name, last_name,cart, age, rol } = validUser
             const token = generateToken({
