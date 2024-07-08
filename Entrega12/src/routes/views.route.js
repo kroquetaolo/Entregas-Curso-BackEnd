@@ -1,14 +1,10 @@
-import ProductManager from '../dao/managers/product.manager.js';
-import CartsManager from '../dao/managers/carts.manager.js';
-import UsersManager from '../dao/managers/users.manager.js';
 import { pagination } from '../utils/pagination.js';
 import CustomRouter from './router.js';
 
+import { productsService, cartsService, usersService } from '../service/index.js'
+
 export default class viewsRouter extends CustomRouter {
     init() {
-        const productManager = new ProductManager()
-        const cartsManager = new CartsManager()
-        const usersManager = new UsersManager()
         
         this.get('/', ['PUBLIC'], async (req, res) => {
             if(!req.user) res.redirect('/login')
@@ -17,8 +13,9 @@ export default class viewsRouter extends CustomRouter {
         
         this.get('/products', ['PUBLIC'], async (req, res) => {
             const { filter_key, filter_value, limit: query_limit, page: query_page, sort_key, sort_value } = req.query
-            const { docs, limit, page, hasPrevPage, hasNextPage, prevPage, nextPage, totalPages} = await productManager.getProducts(filter_key, filter_value, query_limit, query_page, sort_key, sort_value)
-        
+            const request_object = {filter_key, filter_value, query_limit, query_page, sort_key, sort_value}
+            
+            const { docs, limit, page, hasPrevPage, hasNextPage, prevPage, nextPage, totalPages} = await productsService.getProducts(request_object)
             const originalUrl = req.originalUrl;
             const baseUrl = `${req.protocol}://${req.get('host')}${originalUrl.split('?')[0]}`;
         
@@ -35,25 +32,26 @@ export default class viewsRouter extends CustomRouter {
             })
         })
         
-        this.get('/products/:product_id', ['PUBLIC'], async (req, res) => {
+        this.get('/products/:product_id', ['USER', 'ADMIN'], async (req, res) => {
             const {product_id} = req.params;
-            const { title, price, description, category } = await productManager.getProductById(product_id)
+            const { title, price, description, category, _id } = await productsService.getProductById(product_id)
             res.render('products-detail', {
-                title, price, description, category
+                title, price, description, category, _id
             })
         })
         
-        
-        this.get('/carts/:cid', ['PUBLIC'], async (req, res) => {
+        this.get('/carts/:cid', ['USER', 'ADMIN'], async (req, res) => {
             const { cid } = req.params;
-            const cart = await cartsManager.getCartPopulate(cid);
+            const cart = await cartsService.getCartPopulate(cid);
+            cart.products.forEach(product => product.cart_id = cid)
             res.render('carts', {
-                carts: cart.products
+                carts: cart.products,
+                cart_id: cid
             })
             
         })
         
-        this.get('/chat', ['PUBLIC'], (req, res) => {
+        this.get('/chat', ['USER', 'ADMIN'], (req, res) => {
             res.render('chat')
         })
         
@@ -74,13 +72,13 @@ export default class viewsRouter extends CustomRouter {
         })
         
         this.get('/users', ['ADMIN'], async (req, res) => {
-            const users = await usersManager.getUsers()
+            const users = await usersService.getUsers()
             res.render('users', {
                 users
             })
         })
         
-        this.get('*', ['PUBLIC'], (req, res) => {
+        this.get('*', ['PUBLIC'], async (req, res) => {
             res.render('notfound')
         })
     }

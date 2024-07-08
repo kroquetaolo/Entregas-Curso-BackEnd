@@ -15,6 +15,7 @@ const sessionsRouter = new SessionsRouter()
 router.use('/api/carts', cartsRouter.getRouter())
 router.use('/api/products', productsRouter.getRouter())
 router.use('/api/sessions', sessionsRouter.getRouter())
+
 router.use('/', viewsRouter.getRouter())
 
 export default router

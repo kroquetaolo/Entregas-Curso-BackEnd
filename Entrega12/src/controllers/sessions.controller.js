@@ -8,12 +8,13 @@ class SessionsController {
         this.#userService = usersService
     }
 
-    getGitHubCallback = (req,res) =>{
+    getGitHubCallback = async (req,res) =>{
         res.locals.user = req.user
         const token = generateToken({
             _id: req.user._id,
             first_name: req.user.first_name,
             email: req.user.email,
+            cart: req.user.cart,
             rol: 'user'
         })
         res.cookie('token', token, { maxAge: 60*60*60*24, httpOnly: true }).redirect('/')
@@ -26,7 +27,6 @@ class SessionsController {
         if (!first_name || !last_name || !email || !age || !password) return res.sendUserError('All parameters required')
         const exist = await this.#userService.getUserBy({email})
         if(exist) return res.sendUserError('User already exists')
-        
         const newUser = {
             first_name,
             last_name,
@@ -69,10 +69,8 @@ class SessionsController {
         res.cookie('token', token, { maxAge: 60*60*60*24, httpOnly: true }).redirect('/')
     }
 
-    getLogout = (req, res) => {
-        console.log('1');
+    getLogout = async (req, res) => {
         res.cookie('token', null, { expires: new Date(0) });
-        console.log('prueba');
         res.redirect('/')
     }
 
@@ -81,7 +79,7 @@ class SessionsController {
         if(res.locals.user) {
             result.user = res.locals.user 
             const cart = await this.#userService.getUserPopulate(res.locals.user._id)
-            result.cart = cart
+            result.cart = cart[0].cart
         }
         res.sendSuccess(result)
     }
