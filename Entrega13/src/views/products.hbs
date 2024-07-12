@@ -1,0 +1,76 @@
+<h1> {{title}} </h1>
+<main>
+    <div class="products-container">
+        {{#each products}}
+            <div class="products">
+                <h2>{{title}}</h2>
+                {{#if ../isMockProduct}}
+                    <p>{{description}}</p>
+                    <img class="products-img" src="{{thumbnail}}" alt="">
+                    <p>{{category}}</p>
+                    <p>${{price}}</p>
+                {{else}}
+                    <img class="products-img" src="/assets/default-image.jpg" alt="" data-url="/products/{{_id}}">
+                    <p>{{category}}</p>
+                    <p>${{price}}</p>
+                    <button class="products-button" data-url="/products/{{_id}}">Ver detalle</button>
+                {{/if}}
+            </div>
+        {{/each}}
+    </div>
+    {{#if pagination}} 
+        <div class="pagination-container">
+            <div class="{{#unless hasPrevPage}} pagination-unactive {{/unless}}pagination-prev">
+                <a href={{prevLink}}>❰</a>
+            </div>
+            
+            {{#if pagination.has_first_page}}
+                <div class="pagination-first">
+                    <a href='{{pagination.url}}1'>1</a>
+                </div>
+            {{/if}}
+            <ul class="pagination-main">
+                
+                {{#if pagination.has_first_page}}
+                    <p>•••</p>
+                {{/if}}
+
+                {{#if pagination.first_five}}
+                    {{#each pagination.first_five}}
+                        <li {{#if (equals ../pagination.active this)}}
+                                id="pagination-main-active" 
+                            {{/if}}>
+                            <a href='{{../pagination.url}}{{this}}'>
+                                {{pagination.url}}{{this}}
+                            </a>
+                        </li>
+                    {{/each}}
+                {{/if}}
+
+                {{#if pagination.index }}
+                    <li id="pagination-main-active"><p>{{pagination.index}}</p></li>
+                {{/if}}
+
+                {{#if pagination.last_five}}
+                    {{#each pagination.last_five}}
+                        <li> <a href="{{../pagination.url}}{{this}}">{{this}}</a></li>
+                    {{/each}}
+                {{/if}}
+
+                
+                {{#if pagination.has_last_page}}
+                    <p>•••</p>
+                    <li>
+                        <a href='{{pagination.url}}{{pagination.last}}'>{{pagination.last}}</a>
+                    </li>
+                {{/if}}
+            </ul>
+
+            <div class="{{#unless hasNextPage}} pagination-unactive {{/unless}}pagination-next">
+                <a href={{nextLink}}>❱</a>
+            </div>
+
+        </div>
+    {{/if}}
+
+</main>
