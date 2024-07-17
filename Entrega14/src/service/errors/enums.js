@@ -1,0 +1,6 @@
+export const EError = {
+    ROUTING_ERROR:  1,
+    INVALID_TYPE_ERROR: 2,
+    PRODUCT_ALREADY_EXISTS_ERROR: 3
+
+}

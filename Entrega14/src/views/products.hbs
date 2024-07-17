@@ -1,0 +1,79 @@
+<h1> {{title}} </h1>
+<main>
+    <div class="grid grid-cols-1 mx-auto md:grid-cols-4 sm:grid-cols-3 lg:w-4/5 gap-4">
+        {{#each products}}
+            <div class="flex flex-col h-full m-auto w-5/6 sm:w-full items-center max-w-lg rounded-2xl p-4 border border-orange-400/50">
+                <h2 class="text-3xl font-extrabold">{{title}}</h2>
+                {{#if ../isMockProduct}}
+                    <p class="pb-8">{{description}}</p>
+                    <div class="flex flex-col mt-auto w-10/12  items-center">
+                        <img class="h-52 w-36 object-cover rounded-md" src="{{thumbnail}}" alt="">
+                        <p>{{category}}</p>
+                        <p class="text-md font-bold rounded-xl ml-auto my-3 px-2 py-1 border-2 border-orange-400/90">${{price}}</p>
+                    </div>
+                {{else}}
+                
+                    <p class="pb-8">{{description}}</p>
+                    <div class="flex flex-col mt-auto w-10/12  items-center">
+                        <img id="products-img" class="h-52 w-36 object-cover rounded-md cursor-pointer" src="/assets/default-image.jpg" alt="" data-url="/products/{{_id}}">
+                        <p class="text-md font-bold rounded-xl ml-auto my-3 px-2 py-1 border-2 border-orange-400/90">${{price}}</p>
+                        <button id="products-button" class="border-2 border-zinc-700 rounded-lg px-2 py-1 hover:border-zinc-600 hover:bg-zinc-700 transition" data-url="/products/{{_id}}">Ver detalle</button>
+                    </div>
+                {{/if}}
+            </div>
+        {{/each}}
+    </div>
+    {{#if pagination}} 
+        <div class="flex justify-center items-center mt-4">
+            <div class="{{#unless hasPrevPage}} pointer-events-none bg-zinc-800 cursor-not-allowed {{/unless}}pagination-item bg-orange-400 text-black">
+                <a class="h-full w-full flex items-center justify-center" href={{prevLink}}>❰</a>
+            </div>
+            
+            {{#if pagination.has_first_page}}
+                <div class="pagination-item">
+                    <a class="h-full w-full flex items-center justify-center" href='{{pagination.url}}1'>1</a>
+                </div>
+            {{/if}}
+            <ul class="flex justify-center items-center">
+                
+                {{#if pagination.has_first_page}}
+                    <p class="pagination-item border-none bg-transparent hidden sm:flex">•••</p>
+                {{/if}}
+
+                {{#if pagination.first_five}}
+                    {{#each pagination.first_five}}
+                        <li class="pagination-item {{#if (equals ../pagination.active this)}}border border-orange-400 {{/if}}">
+                            <a class="h-full w-full flex items-center justify-center" href='{{../pagination.url}}{{this}}'>
+                                {{pagination.url}}{{this}}
+                            </a>
+                        </li>
+                    {{/each}}
+                {{/if}}
+
+                {{#if pagination.index }}
+                    <li class="pagination-item border border-orange-400"><p class="h-full w-full flex items-center justify-center">{{pagination.index}}</p></li>
+                {{/if}}
+
+                {{#if pagination.last_five}}
+                    {{#each pagination.last_five}}
+                        <li class="pagination-item"> <a class="h-full w-full flex items-center justify-center" href="{{../pagination.url}}{{this}}">{{this}}</a></li>
+                    {{/each}}
+                {{/if}}
+
+                
+                {{#if pagination.has_last_page}}
+                    <p class="pagination-item border-none bg-transparent hidden sm:flex">•••</p>
+                    <li class="pagination-item">
+                        <a class="h-full w-full flex items-center justify-center" href='{{pagination.url}}{{pagination.last}}'>{{pagination.last}}</a>
+                    </li>
+                {{/if}}
+            </ul>
+
+            <div class="{{#unless hasNextPage}} pointer-events-none bg-zinc-800 cursor-not-allowed {{/unless}}pagination-item bg-orange-400 text-black">
+                <a class="h-full w-full flex items-center justify-center " href={{nextLink}}>❱</a>
+            </div>
+
+        </div>
+    {{/if}}
+
+</main>
