@@ -1,5 +1,6 @@
 import { Router } from 'express'
 import passport from 'passport'
+import { http_log_message, logger } from '../utils/winston.logger.js'
 
 export default class CustomRouter {
     constructor() {
@@ -27,6 +28,12 @@ export default class CustomRouter {
         next()
     }
 
+    setLogger = (req, res, next) => {
+        req.logger = logger
+        req.logger.http(http_log_message(req))
+        next()
+    }
+
     handlePolicies(policies) {
         return (req, res, next) => {
             if(policies[0] === 'PUBLIC') return next();
@@ -49,22 +56,20 @@ export default class CustomRouter {
 
     customResponse(req, res, next) {
         res.sendSuccess = payload => res.send({status: 'success', payload})
-        res.sendServerError = error => res.status(500).send({status: 'error', error})
-        res.sendUserError = error => res.status(400).send({status: 'error', error})
         next()
     } 
 
     get(path, policies, ...callbacks) {
-        this.router.get(path,this.setRequestUrls, this.authenticateUser, this.handlePolicies(policies), this.customResponse, this.applyCallbacks(callbacks))
+        this.router.get(path, this.setLogger, this.setRequestUrls, this.authenticateUser, this.handlePolicies(policies), this.customResponse, this.applyCallbacks(callbacks))
     }
     post(path, policies, ...callbacks) {
-        this.router.post(path,this.setRequestUrls, this.authenticateUser, this.handlePolicies(policies), this.customResponse, this.applyCallbacks(callbacks))
+        this.router.post(path, this.setLogger, this.setRequestUrls, this.authenticateUser, this.handlePolicies(policies), this.customResponse, this.applyCallbacks(callbacks))
     }
     put(path, policies, ...callbacks) {
-        this.router.put(path,this.setRequestUrls, this.authenticateUser, this.handlePolicies(policies), this.customResponse, this.applyCallbacks(callbacks))
+        this.router.put(path, this.setLogger, this.setRequestUrls, this.authenticateUser, this.handlePolicies(policies), this.customResponse, this.applyCallbacks(callbacks))
     }
     delete(path, policies, ...callbacks) {
-        this.router.delete(path,this.setRequestUrls, this.authenticateUser, this.handlePolicies(policies), this.customResponse, this.applyCallbacks(callbacks))
+        this.router.delete(path, this.setLogger, this.setRequestUrls, this.authenticateUser, this.handlePolicies(policies), this.customResponse, this.applyCallbacks(callbacks))
     }
 
     init() {}

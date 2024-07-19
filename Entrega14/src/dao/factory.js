@@ -1,4 +1,5 @@
 import config, { connectDB } from '../config/config.js'
+import { logger } from '../utils/winston.logger.js';
 
 export async function services() {
 
@@ -14,7 +15,7 @@ export async function services() {
             break;
         default: //MONGODB
             connectDB()
-            console.log('default connection');
+            logger.info('default connection');
 
             const { default: CartsDaoMongo } = await import("./MONGODB/carts.dao.js");
             const { default: MessagesDaoMongo } = await import("./MONGODB/messages.dao.js");

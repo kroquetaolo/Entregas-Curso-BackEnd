@@ -14,14 +14,15 @@ import appRouters from './routes/index.js'
 import { initializePassport } from './config/passport.config.js';
 import ChatSocket from './sockets/chat.socket.js'
 import { helpers } from './utils/helpers.js';
+import { logger } from './utils/winston.logger.js';
 
 const app = express()
 
 const { port, mongoUrl, cookiePassword, sessionPasword } = config
 
 const httpServer = app.listen(port, error => {
-    if(error) console.log(error.message);
-    console.log('Escuchando en http://localhost:'+port)
+    if(error) logger.error(error.message)
+    logger.info('Escuchando en http://localhost:'+port)
 })
 
 const socketServer = new Server(httpServer);

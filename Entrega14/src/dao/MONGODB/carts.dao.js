@@ -1,4 +1,5 @@
 import { cartsModel } from '../../models/carts.model.js'
+import { logger } from '../../utils/winston.logger.js';
 export default class CartsDao {
     constructor(productsService, ticketsService) {
         this.model = cartsModel;
@@ -153,7 +154,7 @@ export default class CartsDao {
 
         } catch (error) {
             result = error.message
-            console.log(error.message);
+            logger.error(error.message);
         }
         return result
     }
@@ -165,7 +166,7 @@ export default class CartsDao {
             cart = await this.getById(cart_id)
         } catch (error) {
             result = error.message
-            console.log(error.message);
+            logger.error(error.message);
         }
 
         const purchased = []

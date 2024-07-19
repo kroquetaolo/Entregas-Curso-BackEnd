@@ -4,6 +4,7 @@ import { ExtractJwt, Strategy } from 'passport-jwt';
 import config from './config.js';
 const { jwtPrivateKey, passportClientID, passportClientSecret } = config
 import { usersService } from '../service/index.js';
+import { logger } from '../utils/winston.logger.js';
 
 const JWTStrategy = Strategy;
 const JWTExtract = ExtractJwt;
@@ -46,7 +47,7 @@ export const initializePassport = () => {
                 done(null, user);
             }
         } catch (error) {
-            console.log('error: ' + error.message);
+            logger.error('error: ' + error.message);
             return done(error);
         }
     }))

@@ -10,7 +10,7 @@ addToCartButton.addEventListener('click', () => {
         return response.json();
     })
     .then(data => {
-        window.userData.then(user => {
+        window.userData().then(user => {
             const cart_id = user.payload.cart._id
             const product_id = data.payload._id
 

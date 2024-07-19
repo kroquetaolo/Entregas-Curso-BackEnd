@@ -41,28 +41,34 @@ close_modal_buttons.forEach(button => {
 })
 
 //NUMERO DE CARTS
-
-const userData = () => {
-    return fetch(`http://${url}/api/sessions/current`)
-    .then(res => res.json())
-}
+const userData = async () => {
+    try {
+        const response = await fetch(`http://${url}/api/sessions/current`);
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return await response.json();
+    } catch (error) {
+        return { payload: null };  // o alguna estructura de datos de respaldo
+    }
+};
 
 let cartNumberElement = document.getElementById('cart-number');
-const updateCartNumber = () => userData().then(data => {
-
-    let cart_length = 0
-    if(data.payload) {
-        const products = data.payload.cart.products
+const updateCartNumber = async () => {
+    const data = await userData();
+    let cart_length = 0;
+    if (data.payload) {
+        const products = data.payload.cart.products;
         products.forEach(p => {
-            cart_length = cart_length + p.quantity
-        })
-        cartNumberElement.textContent = `${cart_length}`
+            cart_length += p.quantity;
+        });
+        cartNumberElement.textContent = `${cart_length}`;
     }
-})
+};
 
-updateCartNumber()
+if(window.user) updateCartNumber()
 
-window.userData = userData()
+window.userData = userData
 window.updateCartNumber = updateCartNumber
 
 //IMAGEN Y BOTTON PARA DETALLE

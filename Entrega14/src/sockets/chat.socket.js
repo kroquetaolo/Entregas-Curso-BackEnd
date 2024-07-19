@@ -1,4 +1,5 @@
 import { messagesService } from '../service/index.js';
+import { logger } from '../utils/winston.logger.js';
 
 export default class ChatSocket {
     constructor(socketServer) {
@@ -8,7 +9,7 @@ export default class ChatSocket {
 
     init() {
         this.socketServer.on('connection', async socket => {
-            console.log('Cliente conectado al chat')
+            logger.info('Cliente conectado al chat')
             let messages = await this.messagesService.getMessages()
             this.socketServer.emit('messageLogs', messages)
             socket.on('message', async data => {

@@ -1,6 +1,6 @@
-import { cartsService, usersService } from "../service/index.js";
+import { cartsService } from "../service/index.js";
 
-class CartsController {
+export default class CartsController {
     #cartService
     constructor() {
         this.#cartService = cartsService
@@ -68,5 +68,3 @@ class CartsController {
 
     }
 }
-
-export default CartsController

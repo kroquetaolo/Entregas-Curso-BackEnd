@@ -36,7 +36,14 @@ class SessionsController {
             })
         }
         const exist = await this.#userService.getUserBy({email})
-        if(exist) return res.sendUserError('User already exists')
+        if(exist) {
+            CustomError.createError({
+                name: 'Registration Failure',
+                cause:  'User already exists',
+                message: 'Error registering the user',
+                code: EError.USER_ALREADY_EXIST_ERROR
+            })
+        }
         const newUser = {
             first_name,
             last_name,
