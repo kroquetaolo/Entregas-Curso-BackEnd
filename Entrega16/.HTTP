@@ -2,10 +2,13 @@
 GET http://localhost:8080/api/products?limit=3&page=4
 
 ###
+GET http://localhost:8080/api/products
+
+###
 GET http://localhost:8080/api/products?filter_key=status&filter_value=false
 
 ###
-GET http://localhost:8080/api/products/6633cf7a3df0039f0d639e1f
+DELETE  http://localhost:8080/api/products/132123
 
 ###
 POST http://localhost:8080/api/products

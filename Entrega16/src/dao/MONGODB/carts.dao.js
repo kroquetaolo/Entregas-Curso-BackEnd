@@ -10,7 +10,7 @@ export default class CartsDao {
     async getAll() {
         let result;
         try {
-            result = await this.model.find({products: []})
+            result = await this.model.find({})
         } catch (error) {
             result = error.message
         }
@@ -85,7 +85,7 @@ export default class CartsDao {
         try {
             result = await this.model.findOne({_id: cart_id}); 
         } catch (error) {
-            result = undefined;
+            result = 'not found';
         }
         return result;
     }

@@ -44,8 +44,9 @@ export default class CartsController {
 
     purchaseCart = async (req, res) => {
         const { cid } = req.params
-        const result = await this.#cartService.purchaseCart(req.user.email, cid)
-
+        const user = req.user;
+        if(user.cart !== cid) return res.sendSuccess({ message: 'only can purchase your own cart'})
+        const result = await this.#cartService.purchaseCart(user.email, cid)
         if(result.nonstock.length === 0) {
             await cartsService.deleteCart(cid, 'products')
         } else {
