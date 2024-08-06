@@ -10,9 +10,8 @@ class ProductsController {
     }
 
     getProducts = async (req, res) => {
-        const { filter_key, filter_value, limit, page, sort_key, sort_value } = req.query
     
-        const data = await this.#productService.getProducts(filter_key, filter_value, limit, page, sort_key, sort_value)
+        const data = await this.#productService.getProducts(req.query)
     
         const originalUrl = req.originalUrl;
         const baseUrl = `${req.protocol}://${req.get('host')}${originalUrl.split('?')[0]}`;

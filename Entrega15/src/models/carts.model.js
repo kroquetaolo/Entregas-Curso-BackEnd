@@ -14,7 +14,7 @@ const schema = new Schema({
     }
 })
 
-schema.pre(['find', 'findOne'], function(){
+schema.pre(['findOne'], function(){
     this.populate('products.product_id')
 })
 

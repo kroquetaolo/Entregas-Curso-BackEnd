@@ -70,6 +70,7 @@ export default class ProductsDao {
         let result
         try {
             const product = await this.getById(pid)
+            if(product === 'not found') return {message: 'Product not found'}
             if (product.owner !== user.email && !(user.rol.toUpperCase() !== 'ADMIN' || user.rol.toUpperCase() !== 'PREMIUM')) {
                 result = {error: 'you can only delete your own products'}
             } else {
@@ -77,6 +78,7 @@ export default class ProductsDao {
                     result = await this.model.deleteOne({_id: pid})
                 } catch (error) {
                     result = error.message
+                    console.log('delete', error)
                 }
             }
         } catch (error) {
