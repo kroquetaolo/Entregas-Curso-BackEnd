@@ -5,4 +5,4 @@
 .env.*
 *.env
 *.env.*
-src/uploads/
+*.src/uploads/
