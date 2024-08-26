@@ -12,10 +12,10 @@ export default class viewsRouter extends CustomRouter {
         this.getRouter().use(compression())
 
         this.get('/', ['PUBLIC'], (req, res) => {
-            const home_items = [{   
+            const home_items = [{
                     title: 'welcome',
                     description: "Explore our selection of high-quality products. If you need assistance, we're here to help.",
-                    items: [ {title: 'products', description: 'una descrip', url: 'products'}]
+                    items: [ {title: 'products', description: 'una descrip', url: 'products'}],
                 }
             ]
             if(!req.user) {
@@ -25,6 +25,14 @@ export default class viewsRouter extends CustomRouter {
                     items: [
                         { title: 'register',  description: 'una descrip', url: 'register'},
                         { title: 'login',     description: 'una descrip', url: 'login'}
+                    ]
+                })
+            } else {
+                home_items.push({
+                    title: 'Account',
+                    description: "Check your profile here, become premium or update you profile picture",
+                    items: [
+                        { title: 'Profile',  description: 'una descrip', url: 'profile'},
                     ]
                 })
             }

@@ -16,8 +16,9 @@ class UsersController {
 
     updateDocuments = async (req, res) => {
         if(!req.file) return res.render('errors/error', { type: 'upload error', error: 'No se subió ningún archivo.' })
-        const { type, document_type } = req.body
         const user_id = req.params.uid
+        if(req.user?.rol.toUpperCase() !== 'ADMIN' && user_id !== req.user?._id) return res.render('errors/error', { type: 'upload error', error: 'Can not update for that user.' })
+        const { type, document_type } = req.body
         const result = await this.#usersService.updateDocuments(user_id, { type, document_type, file: req.file})
         res.sendSuccess(result)
         

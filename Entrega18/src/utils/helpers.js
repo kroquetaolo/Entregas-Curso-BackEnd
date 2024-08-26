@@ -1,3 +1,7 @@
+import { __dirname } from '../path.js'
+import path from 'path'
+import fs from 'fs'
+
 export const helpers = { 
     equals: (first, second) => first === second,
     equals_url: (first, second) => first.split('/')[1].includes(second)
@@ -14,6 +18,10 @@ export const helpers = {
     },
     isEmpty: array => array.length === 0,
     compareFirst: (first, second) => first > second,
-    getFirst: array => array && array.length ? array[0] : null
+    getFirst: array => array && array.length ? array[0] : null,
+    checkPath: imagePath => {
+        const fullPath = path.join(__dirname, 'public', imagePath);
+        return fs.existsSync(fullPath) ? imagePath : '/assets/default-image.jpg'
+    }
     
 }

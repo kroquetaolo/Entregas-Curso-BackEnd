@@ -8,12 +8,12 @@ export default class UsersRouter extends CustomRouter {
         const {
             switchUserRol,
             updateDocuments,
-            checkDocument
+            // checkDocument
         } = new UserController()
 
         this.post('/premium/:uid', ['ADMIN'], switchUserRol)
-        this.postStorage('/:uid/documents', ['PUBLIC'], updateDocuments)
-        this.get('/test/:uid', ['PUBLIC'], checkDocument)
+        this.postStorage('/:uid/documents', ['PREMIUM', 'ADMIN'], updateDocuments)
+        // this.get('/test/:uid', ['PUBLIC'], checkDocument)
         
     }
 }

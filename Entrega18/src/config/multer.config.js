@@ -14,16 +14,17 @@ const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         const type = req.body.type
         const user_id = req.params.uid || req.user._id
-        let dir = path.join(__dirname, 'assets', 'users', user_id, type)
+        let dir = path.join(__dirname, 'public', 'assets', 'users', user_id, type)
         if(type === 'document') dir = path.join(__dirname, 'uploads', 'users', user_id, type)
         cb(null, createDirectory(dir))
     },
     filename: function (req, file, cb) {
-        let prefix = req.body.type
         const type = req.body.type
         const ext = path.extname(file.originalname);
-        if(type === 'document') prefix = req.body.document_type
-        cb(null, `${prefix}${ext}`)
+        let reference = `${Date.now()}-${type}${ext}`
+        file.reference = reference
+        if(type === 'document') reference = `${req.body.document_type}${ext}`
+        cb(null, reference)
     }
 })
 

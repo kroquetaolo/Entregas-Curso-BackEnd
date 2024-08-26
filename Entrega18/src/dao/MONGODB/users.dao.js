@@ -104,6 +104,7 @@ export default class UserDao {
     async updateDocuments(_id, filter) {
         let result        
         const reference =  `uploads/users/${_id}/${filter.type}/${filter.file.filename}`
+
         const name = filter.document_type
         try {
             const doc = await this.model.findOne({ _id, "documents.name": name });
@@ -124,6 +125,7 @@ export default class UserDao {
                 result: error.message,
             };
         }
+        
         return result
     }
 

@@ -16,7 +16,7 @@ export default class ProductsDao {
         const { 
             filter_key, 
             filter_value, 
-            limit = 10, 
+            limit = 12, 
             page = 1, 
             sort_key, 
             sort_value 

@@ -34,8 +34,10 @@
                                 <a href="/mockingproducts" class="rounded-md px-3 py-2 font-bold {{#if (equals_url current_url 'mockingproducts')}} nav-item-active {{else}}nav-item {{/if}}"
                                 >Mock</a>
                             {{/if}}
-                            <a href="/profile" class="rounded-md px-3 py-2 {{#if (equals_url current_url 'profile')}} nav-item-active {{else}}nav-item {{/if}}"
-                            >Profile</a>
+                            {{#if user}}
+                                <a href="/profile" class="rounded-md px-3 py-2 {{#if (equals_url current_url 'profile')}} nav-item-active {{else}}nav-item {{/if}}"
+                                >Profile</a>
+                            {{/if}}
                             <a href="/" class="rounded-md px-3 py-2 {{#if (equals current_url '/')}} nav-item-active {{else}}nav-item {{/if}}"
                             >Home</a>
                             <a href="/products" class="rounded-md px-3 py-2 {{#if (equals_url current_url 'products')}} nav-item-active {{else}}nav-item {{/if}}"
@@ -115,9 +117,11 @@
                     >Users</a>
                     <a href="/mockingproducts" class="block rounded-md px-3 py-2 font-bold {{#if (equals_url current_url 'mockingproducts')}} nav-item-active {{else}}nav-item {{/if}}"
                     >Mock</a>
-                {{/if}} 
-                <a href="/profile" class="block rounded-md px-3 py-2 {{#if (equals_url current_url 'profile')}} nav-item-active {{else}}nav-item {{/if}}"
-                >Profile</a>
+                {{/if}}
+                {{#if user}}
+                    <a href="/profile" class="block rounded-md px-3 py-2 {{#if (equals_url current_url 'profile')}} nav-item-active {{else}}nav-item {{/if}}"
+                    >Profile</a>
+                {{/if}}
                 <a href="/" class="block rounded-md px-3 py-2 {{#if (equals current_url '/')}} nav-item-active {{else}}nav-item {{/if}}"
                 >Home</a>
                 <a href="/products" class="block rounded-md px-3 py-2 {{#if (equals_url current_url 'products')}} nav-item-active {{else}}nav-item {{/if}}"

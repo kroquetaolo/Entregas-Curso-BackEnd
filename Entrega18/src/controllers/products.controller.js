@@ -24,9 +24,8 @@ class ProductsController {
     addProduct = async (req, res) => {
         if(!req.file) return res.render('errors/error', { type: 'upload error', error: 'No se subió ningún archivo.' })
         const { title, description, price, stock } = req.body
-        const ext = path.extname(req.file.originalname)
         const type = req.body.type
-        const thumbnail = `/assets/users/${req.user._id}/${type}/${type}${ext}`
+        const thumbnail = `/assets/users/${req.user._id}/${type}/${req.file.reference}`
         const product = { title, description, price, stock, thumbnail }
         const newProduct = await this.#productService.addProduct(product, req.user.email)
         res.sendSuccess(newProduct)
